@@ -64,6 +64,9 @@ http {
   client_max_body_size <%= node['nginx']['client_max_body_size'] %>;
   <% end -%>
 
+  proxy_cache_path       <%= node['nginx']['proxy_cache_path'] %>;
+  proxy_temp_path        <%= node['nginx']['proxy_temp_path'] %>;
+
   include <%= node['nginx']['dir'] %>/conf.d/*.conf;
   include <%= node['nginx']['dir'] %>/sites-enabled/*;
 }
