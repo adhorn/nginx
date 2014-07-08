@@ -1,4 +1,3 @@
-user <%= node['nginx']['user'] %><% if node['nginx']['user'] != node['nginx']['group'] %> <%= node['nginx']['group'] %><% end %>;
 worker_processes  <%= node['nginx']['worker_processes'] %>;
 <% if node['nginx']['daemon_disable'] -%>
 daemon off;
@@ -57,16 +56,45 @@ http {
   server_names_hash_bucket_size <%= node['nginx']['server_names_hash_bucket_size'] %>;
   types_hash_max_size <%= node['nginx']['types_hash_max_size'] %>;
   types_hash_bucket_size <%= node['nginx']['types_hash_bucket_size'] %>;
+
   <% if node['nginx']['proxy_read_timeout'] -%>
   proxy_read_timeout <%= node['nginx']['proxy_read_timeout'] %>;
   <% end -%>
+
+  <% if node['nginx']['send_timeout'] -%>
+  send_timeout <%= node['nginx']['send_timeout'] %>;
+  <% end -%>
+
+  <% if node['nginx']['client_body_timeout'] -%>
+  client_body_timeout <%= node['nginx']['client_body_timeout'] %>;
+  <% end -%>
+
+  <% if node['nginx']['client_body_buffer_size'] -%>
+  client_body_buffer_size <%= node['nginx']['client_body_buffer_size'] %>;
+  <% end -%>
+
+  <% if node['nginx']['client_header_buffer_size'] -%>
+  client_header_buffer_size <%= node['nginx']['client_header_buffer_size'] %>;
+  <% end -%>
+
+  <% if node['nginx']['large_client_header_buffers'] -%>
+  large_client_header_buffers <%= node['nginx']['large_client_header_buffers'] %>;
+  <% end -%>
+
   <% if node['nginx']['client_max_body_size'] -%>
   client_max_body_size <%= node['nginx']['client_max_body_size'] %>;
+  <% end -%>
+
+  <% if node['nginx']['client_header_timeout'] -%>
+  client_header_timeout <%= node['nginx']['client_header_timeout'] %>;
+  <% end -%>
+
+  <% if node['nginx']['send_timeout'] -%>
+  send_timeout <%= node['nginx']['send_timeout'] %>;
   <% end -%>
 
   proxy_cache_path       <%= node['nginx']['proxy_cache_path'] %>;
   proxy_temp_path        <%= node['nginx']['proxy_temp_path'] %>;
 
   include <%= node['nginx']['dir'] %>/conf.d/*.conf;
-  include <%= node['nginx']['dir'] %>/sites-enabled/*;
 }
